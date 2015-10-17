@@ -34,3 +34,21 @@ init:
                     return "end"
                 else:
                     raise renpy.IgnoreEvent()
+
+label character_workspace:
+
+    "let's go into Character Workspace"
+
+    # window hide None
+
+    scene black
+    with dissolve
+
+    python:
+        ui.add(CharacterWorkspace())
+        end = ui.interact(suppress_overlay=True, suppress_underlay=True)
+
+    scene white
+    with dissolve
+
+    "You've returned"

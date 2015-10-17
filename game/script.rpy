@@ -16,22 +16,6 @@ label start:
 
     e "Once you add a story, pictures, and music, you can release it to the world!"
 
-    e "let's go into Character Workspace"
-
-label character_workspace:
-
-    window hide None
-
-    scene black
-    with dissolve
-
-    python:
-        ui.add(CharacterWorkspace())
-        end = ui.interact(suppress_overlay=True, suppress_underlay=True)
-
-    scene white
-    with dissolve
-
-    e "You've returned"
+    jump character_workspace
 
     return
