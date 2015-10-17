@@ -65,3 +65,6 @@ game/cache/
 game/saves/
 tmp/
 *.rpy[cb]
+log.txt
+errors.txt
+traceback.txt
