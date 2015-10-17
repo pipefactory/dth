@@ -62,6 +62,5 @@ target/
 # ====================================Ren'py====================================
 # Byte-compiled / optimized / DLL files
 game/cache/
-game/tl/
 tmp/
 *.rpy[cb]
