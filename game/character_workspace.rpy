@@ -1,54 +1,98 @@
-init:
+init -1 python:
 
-    python:
+    class CharacterWorkspace(renpy.Displayable):
 
-        class CharacterWorkspace(renpy.Displayable):
+        def __init__(self, **kwargs):
 
-            def __init__(self):
+            renpy.Displayable.__init__(self)
 
-                renpy.Displayable.__init__(self)
+            self.workbranch_matrix = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 5  =================================
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 10 =================================
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 15 =================================
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 20 =================================
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 25 =================================
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                # 30 =================================
+            ]
 
-                self.mytext = Text(_("This is my first text"), size=36)
+            self.skill_workbench = Image(_("images/skill_workbench.png"))
+            self.skill_cmm_pow1 = Image(_("images/skill_cmm_pow1.png"))
 
-            def visit(self):
+        def visit(self):
 
-                return [ self.mytext ]
+            return [
+                self.skill_workbench,
+                self.skill_cmm_pow1
+            ]
 
-            def render(self, width, height, st, at):
+        def render(self, width, height, st, at):
 
-                r = renpy.Render(width, height)
+            r = renpy.Render(width, height)
+            # draw skill_workbench
+            r.blit(renpy.render(self.skill_workbench, 241, 601, st, at), (100, 100))
 
-                mytext_render = renpy.render(self.mytext, width, height, st, at)
-                mw, mh = mytext_render.get_size()
-                r.blit(mytext_render, ((width - mw) / 2, (height - mh) / 2))
+            renpy.redraw(self, 0)
 
-                renpy.redraw(self, 0)
+            return r
 
-                return r
+        def event(self, ev, x, y, st):
 
-            def event(self, ev, x, y, st):
+            import pygame
 
-                import pygame
+            if ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
+                return "Text end"
+            else:
+                raise renpy.IgnoreEvent()
 
-                if ev.type == pygame.MOUSEBUTTONDOWN:
-                    return "end"
-                else:
-                    raise renpy.IgnoreEvent()
+screen character_workspace:
+
+    pass
 
 label character_workspace:
 
     "let's go into Character Workspace"
 
-    # window hide None
-
-    scene black
-    with dissolve
+    window hide None
+    scene black with dissolve
 
     python:
         ui.add(CharacterWorkspace())
-        end = ui.interact(suppress_overlay=True, suppress_underlay=True)
+    
+    $ end = ui.interact()
 
-    scene white
-    with dissolve
+    scene white with dissolve
+    window show None
 
-    "You've returned"
+    "[end]"
+
+    return

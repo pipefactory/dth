@@ -64,6 +64,7 @@ target/
 game/cache/
 game/saves/
 tmp/
+tools/
 *.rpy[cb]
 log.txt
 errors.txt
