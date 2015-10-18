@@ -30,6 +30,38 @@ init -1 python hide:
     config.name = "dth"
     config.version = "0.0"
 
+    ## initalize logging
+    import os
+    import sys
+    import logging
+
+    # absolute path to the base directory (game/ parent dir)
+    gamedir = os.path.normpath(config.gamedir)
+    config.gamedir = gamedir
+    basedir = os.path.dirname(gamedir)
+    config.basedir = basedir
+
+    # set default encoding
+    sys.setdefaultencoding('utf-8')
+
+    # required to make the above work with with RenPy:
+    config.reject_backslash = False
+
+    # enable logging via the 'logging' module
+    logging.basicConfig(level=logging.DEBUG, format='%(levelname)-8s %(name)-15s %(message)s')    # enable logging via the 'logging' module
+
+    debugfile = logging.FileHandler(os.path.join(basedir, "debug.txt"))
+    debugfile.setLevel(logging.DEBUG)
+    debugfile.setFormatter(logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s - %(message)s'))
+    
+    debuglogger = logging.getLogger(" ".join([config.name, config.version]))
+    debuglogger.addHandler(debugfile)
+
+    # Test log
+    debuglogger.critical("---------- launch game ----------")
+    debuglogger.critical("Base directory: %s" % config.basedir)
+    debuglogger.critical("Game directory: %s" % config.gamedir)
+
     #########################################
     # Themes
 

@@ -1,12 +1,14 @@
 init -1 python:
 
-    class CharacterWorkspace(renpy.Displayable):
+    import pygame
+
+    class SkillWorkbench(renpy.Displayable):
 
         def __init__(self, **kwargs):
 
-            renpy.Displayable.__init__(self)
+            super(SkillWorkbench, self).__init__(self, **kwargs)
 
-            self.workbranch_matrix = [
+            self.skill_workbanch_matrix = [
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -48,6 +50,8 @@ init -1 python:
             self.skill_workbench = Image(_("images/skill_workbench.png"))
             self.skill_cmm_pow1 = Image(_("images/skill_cmm_pow1.png"))
 
+            self._sensitive = True
+
         def visit(self):
 
             return [
@@ -55,44 +59,78 @@ init -1 python:
                 self.skill_cmm_pow1
             ]
 
+        # This shows the table on the given layer.
+        def show(self, layer='master'):
+
+            ui.layer(layer)
+            ui.add(self)
+            ui.close()
+
+        # This hides the table.
+        def hide(self, layer='master'):
+
+            ui.layer(layer)
+            ui.remove(self)
+            ui.close()
+
         def render(self, width, height, st, at):
 
             r = renpy.Render(width, height)
             # draw skill_workbench
             r.blit(renpy.render(self.skill_workbench, 241, 601, st, at), (100, 100))
 
-            renpy.redraw(self, 0)
-
             return r
 
-        def event(self, ev, x, y, st):
+        def per_interact(self):
 
-            import pygame
+            renpy.redraw(self, 0)
 
-            if ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
-                return "Text end"
+        def set_sensitive(self, value):
+
+            self._sensitive = value
+
+        def event(self, evt, x, y, st):
+
+            if not self._sensitive:
+                return ""
+            elif evt.type == pygame.MOUSEBUTTONDOWN and evt.button == 1:
+                return renpy.end_interaction("end")
             else:
                 raise renpy.IgnoreEvent()
 
-screen character_workspace:
+        def interact(self):
 
-    pass
+            evt = ui.interact()
+            if evt == "end":
+                self._sensitive = False
+            else:
+                self._sensitive = True
+            return evt
 
 label character_workspace:
 
     "let's go into Character Workspace"
 
-    window hide None
     scene black with dissolve
 
+
+label skill_workbench:
+
+    $ flag = True
+
     python:
-        ui.add(CharacterWorkspace())
-    
-    $ end = ui.interact()
+
+        sw = SkillWorkbench()
+        sw.show()
+
+        while flag:
+
+            evt = sw.interact()
+
+            if evt == "end":
+                sw.hide()
+                flag = False
 
     scene white with dissolve
-    window show None
 
-    "[end]"
-
-    return
+    "It's [evt]"

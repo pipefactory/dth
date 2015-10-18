@@ -69,3 +69,4 @@ tools/
 log.txt
 errors.txt
 traceback.txt
+debug.txt
