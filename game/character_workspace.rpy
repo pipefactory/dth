@@ -1,4 +1,4 @@
-init -1 python:
+init 1 python:
 
     import pygame
 
@@ -49,6 +49,7 @@ init -1 python:
 
             self.skill_workbench = Image(_("images/skill_workbench.png"))
             self.skill_cmm_pow1 = Image(_("images/skill_cmm_pow1.png"))
+            self.solid_orange = Solid("#f4b00d")
 
             self._sensitive = True
 
@@ -76,6 +77,9 @@ init -1 python:
         def render(self, width, height, st, at):
 
             r = renpy.Render(width, height)
+
+            # draw solid_orange
+            r.blit(renpy.render(self.solid_orange, width, height, st, at), (0, 0))
             # draw skill_workbench
             r.blit(renpy.render(self.skill_workbench, 241, 601, st, at), (100, 100))
 
@@ -94,45 +98,43 @@ init -1 python:
             if not self._sensitive:
                 return ""
             elif evt.type == pygame.MOUSEBUTTONDOWN and evt.button == 1:
+                self._sensitive = False
                 return renpy.end_interaction("end")
             else:
                 raise renpy.IgnoreEvent()
 
-        def interact(self):
 
-            evt = ui.interact()
-            if evt == "end":
-                self._sensitive = False
-            else:
-                self._sensitive = True
-            return evt
 
 label character_workspace:
 
     "let's go into Character Workspace"
 
     show black
+    with dissolve
 
 
 label skill_workbench:
-
-    $ flag = True
 
     python:
 
         sw = SkillWorkbench()
         sw.show()
 
-        while flag:
+        while True:
 
-            evt = sw.interact()
+            evt = ui.interact()
 
             debuglogger.debug("%s" % evt)
 
             if evt == "end":
                 sw.hide()
-                flag = False
+                break
 
-    show white
+    show white onlayer transient
+    with dissolve
+
+    pause
 
     "It's [evt]"
+
+    $ debuglogger.debug("%s" % evt)

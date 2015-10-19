@@ -6,8 +6,8 @@
 # Declare characters used by this game.
 
 define e = Character('???', color="#c8ffc8")
-image white = Solid("#fff")
-image black = Solid("#000")
+image white = "#fff"
+image black = "#000"
 
 screen character_workspace_button:
 
