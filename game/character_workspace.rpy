@@ -111,7 +111,7 @@ label character_workspace:
 
     "let's go into Character Workspace"
 
-    scene black with dissolve
+    show black
 
 
 label skill_workbench:
@@ -127,10 +127,12 @@ label skill_workbench:
 
             evt = sw.interact()
 
+            debuglogger.debug("%s" % evt)
+
             if evt == "end":
                 sw.hide()
                 flag = False
 
-    scene white with dissolve
+    show white
 
     "It's [evt]"

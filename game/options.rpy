@@ -20,6 +20,10 @@ init -1 python hide:
     config.screen_width = 1280
     config.screen_height = 768
 
+    ## These control the window could be resize or not
+
+    config.gl_resize = False
+
     ## This controls the title of the window, when Ren'Py is
     ## running in a window.
 
@@ -61,6 +65,8 @@ init -1 python hide:
     debuglogger.critical("---------- launch game ----------")
     debuglogger.critical("Base directory: %s" % config.basedir)
     debuglogger.critical("Game directory: %s" % config.gamedir)
+
+    global debuglogger
 
     #########################################
     # Themes

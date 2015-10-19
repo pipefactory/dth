@@ -6,6 +6,8 @@
 # Declare characters used by this game.
 
 define e = Character('???', color="#c8ffc8")
+image white = Solid("#fff")
+image black = Solid("#000")
 
 screen character_workspace_button:
 
@@ -26,11 +28,9 @@ label before_main_menu:
 # The game starts here.
 label start:
 
-    scene white
+    show white
 
     e "You've created a new Ren'Py game."
-
-    e "Once you add a story, pictures, and music, you can release it to the world!"
 
 label roll_in_workspace:
 
