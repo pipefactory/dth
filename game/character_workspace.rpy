@@ -1,6 +1,7 @@
 init 1 python:
 
     import pygame
+    import random
 
     class SkillWorkbench(renpy.Displayable):
 
@@ -51,8 +52,6 @@ init 1 python:
             self.skill_cmm_pow1 = Image(_("images/skill_cmm_pow1.png"))
             self.solid_orange = Solid("#f4b00d")
 
-            self._sensitive = True
-
         def visit(self):
 
             return [
@@ -81,26 +80,23 @@ init 1 python:
             # draw solid_orange
             r.blit(renpy.render(self.solid_orange, width, height, st, at), (0, 0))
             # draw skill_workbench
-            r.blit(renpy.render(self.skill_workbench, 241, 601, st, at), (100, 100))
+            r.blit(renpy.render(self.skill_workbench, 241, 601, st, at), (random.randint(50, 150), random.randint(50, 150)))
+
+            debuglogger.debug("%s, %s, %s, %s, %s" % (repr(self), width, height, st, at))
 
             return r
 
         def per_interact(self):
 
-            renpy.redraw(self, 0)
-
-        def set_sensitive(self, value):
-
-            self._sensitive = value
+            # renpy.redraw(self, 0)
+            pass
 
         def event(self, evt, x, y, st):
 
-            if not self._sensitive:
-                return ""
-            elif evt.type == pygame.MOUSEBUTTONDOWN and evt.button == 1:
-                self._sensitive = False
+            if evt.type == pygame.MOUSEBUTTONUP and evt.button == 1:
                 return renpy.end_interaction("end")
             else:
+                # debuglogger.debug("%s, %s, %s, %s, %s" % (repr(self), repr(evt), x, y, st))
                 raise renpy.IgnoreEvent()
 
 
@@ -127,13 +123,11 @@ label skill_workbench:
             debuglogger.debug("%s" % evt)
 
             if evt == "end":
-                sw.hide()
+                # sw.hide()
                 break
 
-    show white onlayer transient
+    show white
     with dissolve
-
-    pause
 
     "It's [evt]"
 

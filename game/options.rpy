@@ -193,6 +193,18 @@ init -1 python hide:
     ## buttons have their own styles.
 
 
+
+    #########################################
+    ## These let you default style in Ren'Py.
+
+    style.default_outline = Style(style.default)
+    # style.default_outline.color = "#fff"
+    style.default_outline.color = "#f8415a"
+    # style.default_outline.background = "#f8415a"
+    style.default_outline.outlines = [ (absolute(1), "#000", absolute(1), absolute(1)) ]
+    style.default_outline.xpadding = 5
+    style.default_outline.ypadding = 5
+
     #########################################
     ## These settings let you change some of the sounds that are used by
     ## Ren'Py.

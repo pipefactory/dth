@@ -9,11 +9,10 @@ define e = Character('???', color="#c8ffc8")
 image white = "#fff"
 image black = "#000"
 
-screen character_workspace_button:
+screen skill_workbanch_button:
 
-    vbox xalign 0.01 yalign 0.01:
-
-        textbutton "Character Workspace" action ui.callsinnewcontext("character_workspace")
+    textbutton "Skill Workbanch" id "tbtn_skill_workbanch" action ui.callsinnewcontext("character_workspace") xalign 0.01 yalign 0.01 style style.default_outline
+    $ 
 
 ## ==================================================================
 ## before_main_menu
@@ -34,8 +33,10 @@ label start:
 
 label roll_in_workspace:
 
-    show screen character_workspace_button
+    show screen skill_workbanch_button
 
     "roll_in_workspace"
+
+    "roll_in_workspace..."
 
     jump roll_in_workspace
