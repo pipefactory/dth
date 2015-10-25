@@ -99,36 +99,66 @@ init 1 python:
                 # debuglogger.debug("%s, %s, %s, %s, %s" % (repr(self), repr(evt), x, y, st))
                 raise renpy.IgnoreEvent()
 
+screen workstation(char_id):
+
+    default evt = 0
+
+    frame:
+        background "#f4b00d"
+        xfill True
+        yfill True
+        xpadding 0
+        ypadding 0
+
+        hbox:
+
+            frame:
+                background "#444"
+                xfill False
+                xsize 350
+                yfill True
+
+                vbox:
+                    textbutton "frame1" xalign 0.5 action Return(0)
+
+            frame:
+                background "#888"
+                xfill True
+                yfill True
+
+                hbox:
+                    textbutton "frame3" xalign 0.5 action Return(2)
 
 
-label character_workspace:
+screen character_workspace:
+
+    pass
+
+
+
+label lbl_character_workspace:
 
     "let's go into Character Workspace"
 
-    show black
-    with dissolve
+    call screen workstation("hakurei")
 
+    # $ evt = renpy.call_screen("workstation", char_id="hakurei")
 
-label skill_workbench:
+    # python:
 
-    python:
+    #     sw = SkillWorkbench()
+    #     sw.show()
 
-        sw = SkillWorkbench()
-        sw.show()
+    #     while True:
 
-        while True:
+    #         evt = ui.interact()
 
-            evt = ui.interact()
+    #         debuglogger.debug("%s" % evt)
 
-            debuglogger.debug("%s" % evt)
+    #         if evt == "end":
+    #             # sw.hide()
+    #             break
 
-            if evt == "end":
-                # sw.hide()
-                break
+    "It's [_return]"
 
-    show white
-    with dissolve
-
-    "It's [evt]"
-
-    $ debuglogger.debug("%s" % evt)
+    $ debuglogger.debug("%s" % _return)

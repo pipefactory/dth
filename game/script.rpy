@@ -11,8 +11,7 @@ image black = "#000"
 
 screen skill_workbanch_button:
 
-    textbutton "Skill Workbanch" id "tbtn_skill_workbanch" action ui.callsinnewcontext("character_workspace") xalign 0.01 yalign 0.01 style style.default_outline
-    $ 
+    textbutton "Skill Workbanch" id "tbtn_skill_workbanch" action ui.callsinnewcontext("lbl_character_workspace") xalign 0.01 yalign 0.01
 
 ## ==================================================================
 ## before_main_menu
