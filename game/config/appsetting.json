@@ -1,0 +1,10 @@
+{
+    // screen
+    "screen_width": 1280,
+    "screen_height": 768,
+
+    // font
+    "default_font_1": "",
+    "default_font_2": "",
+    "default_font_3": ""
+}
