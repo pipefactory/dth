@@ -51,7 +51,19 @@ init -10 python:
 
         def __str__(self):
             return 'InherentSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
-    
+
+    ### 
+    # BlessingSkill
+    ###
+
+    class BlessingSkill(Skill):
+
+        def __init__(self, identity, effects = []):
+            Skill.__init__(self, identity, effects)
+
+        def __str__(self):
+            return 'BlessingSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
+
     ### 
     # ActionableSkill
     ###
