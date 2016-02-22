@@ -9,24 +9,23 @@ init -99 python:
         def __init__(self, identity):
             self._identity = identity
 
-        def getIdentity(self):
-            return self._identity
-        Identity = property(getIdentity)
+        def identity():
+            doc = "The identity property."
+            def fget(self):
+                return self._identity
+            def fset(self, value):
+                self._identity = value
+            return locals()
+        identity = property(**identity())
 
     ###
-    # Block
+    # Effect
     ###
 
-    class Block(object):
+    class Effect(object):
 
-        def __init__(self, width = 1, height = 1):
-            self._width = width
-            self._height = height
+        def __init__(self):
+            pass
 
-        def getWidth(self):
-            return self._width
-        Width = property(self._width)
-
-        def getHeight(self):
-            return self._height
-        Height = property(self._height)
+        def __str__(self):
+            return 'Effect'
