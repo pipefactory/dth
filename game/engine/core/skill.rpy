@@ -53,90 +53,58 @@ init -10 python:
             return 'InherentSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
 
     ### 
-    # BlessingSkill
+    # InherentSkill
     ###
 
-    class BlessingSkill(Skill):
+    class PortableSkill(Skill):
 
         def __init__(self, identity, effects = []):
             Skill.__init__(self, identity, effects)
+
+        def __str__(self):
+            return 'PortableSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
+
+    ### 
+    # BlessingSkill
+    ###
+
+    class BlessingSkill(PortableSkill):
+
+        def __init__(self, identity, effects = []):
+            PortableSkill.__init__(self, identity, effects)
 
         def __str__(self):
             return 'BlessingSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
 
     ### 
-    # ActionableSkill
+    # TargetableSkill
     ###
 
-    class ActionableSkill(Skill):
+    class TargetableSkill(PortableSkill):
 
-        def __init__(self, identity, effects = []):
-            Skill.__init__(self, identity, effects)
+        def __init__(self, identity, effects = [], target = None):
+            self._target = target
+            PortableSkill.__init__(self, identity, effects)
 
-        def __str__(self):
-            return 'ActionableSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
-
-
-
-    ###
-    # SkillBlock
-    ###
-
-    class SkillBlock(object):
-
-        def __init__(self, x = 0, y = 0, width = 1, height = 1, skill = None):
-            self._x = x
-            self._y = y
-            self._width = width
-            self._height = height
-            self._skill = skill
-
-        def x():
-            doc = "The x property."
+        def target():
+            doc = "The target property."
             def fget(self):
-                return self._x
+                return self._target
             def fset(self, value):
-                self._x = value
-            return locals()
-        x = property(**x())
-
-        def y():
-            doc = "The y property."
-            def fget(self):
-                return self._y
-            def fset(self, value):
-                self._y = value
-            return locals()
-        y = property(**y())
-
-        def width():
-            doc = "The width property."
-            def fget(self):
-                return self._width
-            def fset(self, value):
-                self._width = value
-            return locals()
-        width = property(**width())
-
-        def height():
-            doc = "The height property."
-            def fget(self):
-                return self._height
-            def fset(self, value):
-                self._height = value
-            return locals()
-        height = property(**height())
-
-        def skill():
-            doc = "The skill property."
-            def fget(self):
-                return self._skill
-            def fset(self, value):
-                self._skill = value
+                self._target = value
             def fdel(self):
-                del self._skill
+                del self._target
             return locals()
-        skill = property(**skill())
+        target = property(**target())
 
         def __str__(self):
-            return 'Block[x=%s,y=%s,width=%s,height=%s]' % (self._x, self._y, self._width, self._height)
+            return 'TargetableSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
+
+    ###
+    # SkillTarget
+    ###
+
+    class SkillTarget(object):
+
+        def __init__(self):
+            pass
