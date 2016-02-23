@@ -1,8 +1,14 @@
-screen workspace(identity):
+screen workspace:
 
-    default evt = 0
+    python:
+        rangelist = range(0, 100)
 
-    frame:
+    tag characterWorkspace
+    modal True
+
+    default characterIdentity = ''
+
+    window:
         background "#f4b00d"
         xfill True
         yfill True
@@ -10,15 +16,34 @@ screen workspace(identity):
         ypadding 0
 
         hbox:
-
-            frame:
+            window:
                 background "#444"
                 xfill False
                 xsize 350
                 yfill True
 
                 vbox:
-                    textbutton "frame1" xalign 0.5 action Return(0)
+                    hbox:
+                        text "Avaliable Character"
+                        button:
+                            text "S/L"
+
+                    side "c r":
+                        viewport id "ws_charlist":
+                            draggable True
+                            mousewheel True
+
+                            grid 1 len(rangelist):
+
+                                for i in rangelist:
+
+                                    hbox:
+                                        window:
+                                            background "#8aa41b"
+                                            text 'box' + str(i)
+                                            ysize 100
+
+                        vbar value YScrollValue("ws_charlist")
 
             frame:
                 background "#888"
@@ -26,4 +51,6 @@ screen workspace(identity):
                 yfill True
 
                 hbox:
-                    textbutton "frame3" xalign 0.5 action Return(2)
+                    textbutton "frame3":
+                        xalign 0.5
+                        action [Return(2)]
