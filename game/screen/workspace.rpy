@@ -8,7 +8,7 @@ screen workspace:
 
     default characterIdentity = ''
 
-    window:
+    frame:
         background "#f4b00d"
         xfill True
         yfill True
@@ -16,14 +16,20 @@ screen workspace:
         ypadding 0
 
         hbox:
-            window:
+            frame:
+                background "#222"
+                xfill False
+                xsize 150
+                yfill True
+
+            frame:
                 background "#444"
                 xfill False
                 xsize 350
                 yfill True
 
                 vbox:
-                    hbox:
+                    side "c r":
                         text "Avaliable Character"
                         button:
                             text "S/L"
@@ -37,11 +43,16 @@ screen workspace:
 
                                 for i in rangelist:
 
-                                    hbox:
-                                        window:
+                                    side "c r":
+                                        frame:
                                             background "#8aa41b"
                                             text 'box' + str(i)
-                                            ysize 100
+                                            xfill True
+                                            yfill False
+                                            ysize 80
+
+                                        button:
+                                            text "kk"
 
                         vbar value YScrollValue("ws_charlist")
 
