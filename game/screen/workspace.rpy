@@ -1,7 +1,8 @@
 screen workspace:
 
     python:
-        rangelist = range(0, 100)
+        avaliableCharacterCount = 100
+        rangelist = range(0, avaliableCharacterCount)
 
     tag characterWorkspace
     modal True
@@ -30,7 +31,10 @@ screen workspace:
 
                 vbox:
                     side "c r":
-                        text "Avaliable Character"
+                        frame:
+                            xfill False
+                            xsize 275
+                            text "Avaliable Character"
                         button:
                             text "S/L"
 
@@ -47,8 +51,9 @@ screen workspace:
                                         frame:
                                             background "#8aa41b"
                                             text 'box' + str(i)
-                                            xfill True
+                                            xfill False
                                             yfill False
+                                            xsize 275
                                             ysize 80
 
                                         button:
