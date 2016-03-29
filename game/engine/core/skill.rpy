@@ -2,7 +2,7 @@ init -10 python:
 
     ###
     # Skill
-    # The Skill class encapsulates a thing that a Fighter can do - e.g. 'Attack' or 'Defend' or 'Move' or 'Summon' or whatever.
+    # The Skill class encapsulates a thing that a Chara can do - e.g. 'Attack' or 'Defend' or 'Move' or 'Summon' or whatever.
     # Ideally, a Skill instance should be a singleton/flyweight class, only one instance and no references back to the parent object. Or at least potentially be used like that.
     ###
     

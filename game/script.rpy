@@ -1,16 +1,16 @@
-﻿# You can place the script of your game in this file.
-
-# Declare images below this line, using the image statement.
-# eg. image eileen happy = "eileen_happy.png"
-
-# Declare characters used by this game.
-
-# The game starts here.
+﻿# The game starts here.
 label start:
 
     scene bg white
 
-    show screen workspace("hakurei")
+    $ chara = library.chara('usami_sumireko')
+
+    if chara is not None:
+        "[chara]"
+    else:
+        "chara undefined"
+
+    show screen workspace("usami_sumireko")
     # show screen side_test
 
     pause
