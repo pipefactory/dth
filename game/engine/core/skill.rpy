@@ -25,9 +25,6 @@ init -10 python:
             return locals()
         effects = property(**effects())
 
-        def __str__(self):
-            return 'Skill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
-
     ### 
     # AwardSkill
     ###
@@ -36,9 +33,6 @@ init -10 python:
 
         def __init__(self, identity, effects = []):
             Skill.__init__(self, identity, effects)
-
-        def __str__(self):
-            return 'AwardSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
 
     ### 
     # InherentSkill
@@ -49,9 +43,6 @@ init -10 python:
         def __init__(self, identity, effects = []):
             Skill.__init__(self, identity, effects)
 
-        def __str__(self):
-            return 'InherentSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
-
     ### 
     # InherentSkill
     ###
@@ -61,9 +52,6 @@ init -10 python:
         def __init__(self, identity, effects = []):
             Skill.__init__(self, identity, effects)
 
-        def __str__(self):
-            return 'PortableSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
-
     ### 
     # BlessingSkill
     ###
@@ -72,9 +60,6 @@ init -10 python:
 
         def __init__(self, identity, effects = []):
             PortableSkill.__init__(self, identity, effects)
-
-        def __str__(self):
-            return 'BlessingSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
 
     ### 
     # TargetableSkill
@@ -96,9 +81,6 @@ init -10 python:
                 del self._target
             return locals()
         target = property(**target())
-
-        def __str__(self):
-            return 'TargetableSkill(identity=[%s],effects=[%s])' % (self._identity, ','.join(str(tag) for tag in self._tags))
 
     ###
     # SkillTarget

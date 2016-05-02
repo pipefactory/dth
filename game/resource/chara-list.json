@@ -2,7 +2,15 @@
     "usami_sumireko": {
         "graze": 45,
         "name": "宇佐见堇子",
-        "typelist": ["FIGHTER","COUNSELOR"],
-        "grouplist": ["JYOSHIKOUSEI"]
+        "desc": "",
+        "positions": ["FIGHTER","COUNSELOR"],
+        "groups": ["JYOSHIKOUSEI"]
+    },
+    "yakumo_yukari": {
+        "graze": 70,
+        "name": "八云紫",
+        "desc": "",
+        "positions": ["FIGHTER","COUNSELOR"],
+        "groups": ["YOUKAI"]
     }
 }

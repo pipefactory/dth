@@ -1,5 +1,15 @@
 init -10 python:
 
+    class Talent(Aware):
+
+        def __init__(self):
+            pass
+
+    class Group(Aware):
+
+        def __init__(self):
+            pass
+
     ###
     # Chara
     ###
@@ -8,9 +18,10 @@ init -10 python:
 
         def __init__(self, identity, **kwargs):
             self._name = kwargs['name'] if 'name' in kwargs else '_undefined_'
+            self._desc = kwargs['desc'] if 'desc' in kwargs else ''
             self._graze = kwargs['graze'] if 'graze' in kwargs else 0
-            self._typelist = kwargs['typelist'] if 'typelist' in kwargs else []
-            self._grouplist = kwargs['grouplist'] if 'grouplist' in kwargs else []
+            self._positions = kwargs['positions'] if 'positions' in kwargs else []
+            self._groups = kwargs['groups'] if 'groups' in kwargs else []
             Aware.__init__(self, identity)
 
         ###
@@ -29,6 +40,17 @@ init -10 python:
             return locals()
         name = property(**name())
 
+        def desc():
+            doc = "The desc property."
+            def fget(self):
+                return self._desc
+            def fset(self, value):
+                self._desc = value
+            def fdel(self):
+                del self._desc
+            return locals()
+        desc = property(**desc())
+
         def graze():
             doc = "The graze property."
             def fget(self):
@@ -40,32 +62,24 @@ init -10 python:
             return locals()
         graze = property(**graze())
 
-        def typelist():
-            doc = "The typelist property."
+        def positions():
+            doc = "The positions property."
             def fget(self):
-                return self._typelist
+                return self._positions
             def fset(self, value):
-                self._typelist = value
+                self._positions = value
             def fdel(self):
-                del self._typelist
+                del self._positions
             return locals()
-        typelist = property(**typelist())
+        positions = property(**positions())
 
-        def grouplist():
-            doc = "The grouplist property."
+        def groups():
+            doc = "The groups property."
             def fget(self):
-                return self._grouplist
+                return self._groups
             def fset(self, value):
-                self._grouplist = value
+                self._groups = value
             def fdel(self):
-                del self._grouplist
+                del self._groups
             return locals()
-        grouplist = property(**grouplist())
-
-        ###
-        # internal
-        # ===============================================================
-        ###
-
-        def __str__(self):
-            return 'Chara(' + ','.join("%s=[%s]" % item for item in vars(self).items()) + ')'
+        groups = property(**groups())

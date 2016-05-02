@@ -18,6 +18,9 @@ init -99 python:
             return locals()
         identity = property(**identity())
 
+        def __str__(self):
+            return type(self).__name__ + '(' + ','.join("%s=[%s]" % item for item in vars(self).items()) + ')'
+
     ###
     # Effect
     ###
